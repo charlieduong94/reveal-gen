@@ -1,0 +1,30 @@
+{
+  "name": "reveal-gen",
+  "version": "0.0.1",
+  "description": "A tool for generating quick presentations using reveal.js, marko, and lasso.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "reveal-gen": "bin/reveal-gen"
+  },
+  "keywords": [
+    "reveal.js",
+    "marko",
+    "lasso"
+  ],
+  "author": "Charlie Duong",
+  "license": "ISC",
+  "dependencies": {
+    "argly": "^1.0.0",
+    "custom-logger": "^0.3.1",
+    "lasso": "^2.5.8",
+    "lasso-marko": "^2.0.7",
+    "marko": "^3.9.4",
+    "mustache": "^2.2.1",
+    "opn": "^4.0.2",
+    "reveal.js": "^3.3.0"
+  },
+  "devDependencies": {}
+}

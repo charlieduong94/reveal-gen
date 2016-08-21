@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+html lang="en"
+    head
+        title - {{name}}
+        <!-- do not remove -->
+        link rel="stylesheet" href="{{{lassoHead}}}"
+    body
+        div.reveal
+            div.slides
+                section data-markdown
+                    script type='text-template'
+                        ---
+                            ## {{name}}
+
+                            #### {{description}}
+
+                            By {{author}}
+                        ---
+                section data-markdown
+                    <!-- use normal html for slides that have code blocks so that whitespace is preserved-->
+                    <script type='text/template'>
+                        ### Commands
+                        ```javascript
+                            $ reveal-gen help
+                            Usage:
+                                reveal-gen <action>
+                            Actions:
+                                build - Compiles the template and outputs the minified js and css
+                                init - Initializes the template
+                                serve - Serves up the presentation in the browser
+                                help - Prints out this help message
+                        ```
+                    </script>
+        <!-- do not remove -->
+        script type="text/javascript" src="{{{lassoBody}}}"
+        script type="text/javascript"
+            ---
+                Reveal.initialize();
+                hljs.initHighlightingOnLoad();
+            ---
