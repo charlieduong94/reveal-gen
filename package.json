@@ -26,5 +26,13 @@
     "opn": "^4.0.2",
     "reveal.js": "^3.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlieduong94/reveal-gen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/charlieduong94/reveal-gen/issues"
+  },
+  "homepage": "https://github.com/charlieduong94/reveal-gen#readme"
 }
