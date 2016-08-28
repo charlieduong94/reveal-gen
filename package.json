@@ -1,6 +1,6 @@
 {
   "name": "reveal-gen",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A tool for generating quick presentations using reveal.js, marko, and lasso.",
   "main": "index.js",
   "scripts": {
