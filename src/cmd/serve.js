@@ -61,7 +61,11 @@ module.exports = {
 
             fs.watch(process.cwd() + '/index.marko', function(eventType, change){
                 logger.info('Change detected. Triggering rebuild...');
-                build();
+                try {
+                    build();
+                } catch (err) {
+                    logger.error(err);
+                }
             });
         });
     }
