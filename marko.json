@@ -1,0 +1,6 @@
+{
+    "<markdown>" : {
+        "preserve-whitespace": true,
+        "renderer": "./src/components/markdown"
+    }
+}

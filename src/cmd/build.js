@@ -23,7 +23,7 @@ function _build(options, callback) {
         rawTemplate = fs.readFileSync(templatePath, 'utf-8');
         config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
     } catch (err) {
-        logger.error('Unable to read index.marko or config.json');
+        logger.error('Unable to read index.marko or config.json', err);
         return;
     }
 
@@ -42,7 +42,7 @@ function _build(options, callback) {
                 lassoBody: result.urlsBySlot.body[0].slice(1)
             });
             // HACK: temporarily move the file to this workspace so
-            // that it can be compiled by markos
+            // that it can be compiled by marko
             var tempDir = path.normalize(__dirname + '/../../temp');
             fs.access(tempDir, WRITE_PERMISSION, function(err) {
                 if (err) {

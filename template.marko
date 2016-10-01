@@ -5,25 +5,24 @@ html lang="en"
         <!-- do not remove -->
         link rel="stylesheet" href="{{{lassoHead}}}"
     body
+        marko-compiler-options preserve-whitespace
         div.reveal
             div.slides
-                section data-markdown
-                    script type='text-template'
-                        ---
-                            ## {{name}}
+                markdown
+                    ---
+                    ## {{name}}
 
-                            #### {{description}}
+                    #### {{description}}
 
-                            By {{author}}
-                        ---
-                section data-markdown
-                    <!-- use normal html for slides that have code blocks so that whitespace is preserved-->
-                    <script type='text/template'>
-                        ### Code
-                        ```javascript
-                            console.log('Hello world');
-                        ```
-                    </script>
+                    By {{author}}
+                    ---
+                markdown
+                    ---
+                    ### Code
+                    ```javascript
+                        console.log('Hello world');
+                    ```
+                    ---
         <!-- do not remove -->
         script type="text/javascript" src="{{{lassoBody}}}"
         script type="text/javascript"
