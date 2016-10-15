@@ -1,7 +1,6 @@
 'use strict';
 
 var fs = require('fs');
-var revealPath = require.resolve('reveal.js');
 var revealBaseDir = require('./getRevealBaseDir')();
 
 module.exports = function() {

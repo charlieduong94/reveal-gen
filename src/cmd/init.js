@@ -1,6 +1,4 @@
-/**
- * Init command
- */
+'use strict';
 
 var Mustache = require('mustache');
 var fs = require('fs');
@@ -37,6 +35,8 @@ function _getThemes() {
     });
 }
 
+/* global console */
+// allow console usage here for printouts
 module.exports = {
     description: 'Initializes the template',
     exec: function() {
@@ -56,7 +56,7 @@ module.exports = {
                             console.log('defaulting to white theme');
                             theme = DEFAULT_THEME;
                         }
-                        themePath = revealBaseDir + 'css/theme/' + theme + '.css';
+                        var themePath = revealBaseDir + 'css/theme/' + theme + '.css';
                         console.log('Generating index.marko');
                         var template = fs.readFileSync(require.resolve('../../template.marko'), 'utf-8');
                         var content = Mustache.render(template, {

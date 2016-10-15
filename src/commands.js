@@ -1,3 +1,5 @@
+'use strict';
+
 var commands = exports;
 var fs = require('fs');
 
@@ -9,6 +11,8 @@ files.forEach(function(file) {
     commands[name] = require(cmdDir + '/' + name);
 });
 
+/* global console */
+// allow console usage here for printouts
 commands.help = {
     description: 'Prints out this help message',
     exec: function() {

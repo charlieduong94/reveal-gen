@@ -26,7 +26,11 @@
     "opn": "^4.0.2",
     "reveal.js": "^3.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "git-hooks": "^1.1.6",
+    "jscs": "^3.0.7",
+    "jshint": "^2.9.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/charlieduong94/reveal-gen.git"

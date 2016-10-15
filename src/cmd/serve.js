@@ -1,6 +1,7 @@
+'use strict';
+
 var http = require('http');
 var fs = require('fs');
-var path = require('path');
 var build = require('./build').exec;
 var logger = require('../logger');
 var open = require('opn');

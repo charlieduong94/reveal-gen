@@ -5,6 +5,8 @@ var getThemes = require('../util/getThemes');
 var listThemes = require('./list-themes').exec;
 var revealBaseDir = require('../util/getRevealBaseDir')();
 
+/* global console */
+// allow console usage here for printouts
 module.exports = {
     'description': 'Switches to another reveal.js theme',
     'exec': function() {

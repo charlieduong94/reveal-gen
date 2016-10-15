@@ -1,3 +1,5 @@
+'use strict';
+
 var lasso = require('lasso');
 var fs = require('fs');
 var Mustache = require('mustache');
