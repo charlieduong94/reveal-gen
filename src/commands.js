@@ -1,15 +1,15 @@
 'use strict'
 
 const path = require('path')
-var fs = require('fs')
+const fs = require('fs')
 
-var commands = exports
+const commands = exports
 
-var cmdDir = path.join(__dirname, 'cmd')
-var files = fs.readdirSync(cmdDir)
+const cmdDir = path.join(__dirname, 'cmd')
+const files = fs.readdirSync(cmdDir)
 
 files.forEach(function (file) {
-  var name = file.split('.')[0]
+  let name = file.split('.')[0]
   commands[name] = require(path.join(cmdDir, name))
 })
 
@@ -17,7 +17,7 @@ files.forEach(function (file) {
 // allow console usage here for printouts
 commands.help = {
   description: 'Prints out this help message',
-  exec: function () {
+  exec: async function () {
     console.log('Usage:\n    reveal-gen <action>')
     console.log('Actions:')
     Object.keys(commands).forEach(function (name) {

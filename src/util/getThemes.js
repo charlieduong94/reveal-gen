@@ -1,10 +1,10 @@
 'use strict'
 
-var fs = require('fs')
-var revealBaseDir = require('./getRevealBaseDir')()
+const fs = require('fs')
+const revealBaseDir = require('./getRevealBaseDir')()
 
 module.exports = function () {
-  var files = fs.readdirSync(revealBaseDir + 'css/theme')
+  let files = fs.readdirSync(revealBaseDir + 'css/theme')
   files = files.map(function (file) {
     if (file.endsWith('.css')) {
       return file.split('.')[0]
