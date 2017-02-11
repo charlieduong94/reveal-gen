@@ -1,3 +1,3 @@
-'use strict';
+'use strict'
 
-module.exports = require('custom-logger');
+module.exports = require('custom-logger')
