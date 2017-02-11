@@ -59,7 +59,7 @@ async function _build (options) {
         try {
           let template = require(tempFilePath)
           let writeStream = fs.createWriteStream(path.join(process.cwd() + '/index.html'))
-          template.renderSync({}, writeStream)
+          template.render({}, writeStream)
           logger.info('Build Complete')
         } catch (err) {
           logger.error('Unable to build template')
