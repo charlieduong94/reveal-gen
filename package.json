@@ -19,12 +19,12 @@
   "dependencies": {
     "argly": "^1.0.0",
     "custom-logger": "^0.3.1",
-    "lasso": "^2.5.8",
+    "lasso": "^2.11.1",
     "lasso-marko": "^2.0.7",
-    "marko": "^3.9.4",
+    "marko": "^4.0.0-rc.17",
     "mustache": "^2.2.1",
     "opn": "^4.0.2",
-    "reveal.js": "^3.3.0"
+    "reveal.js": "^3.4.1"
   },
   "devDependencies": {
     "git-hooks": "^1.1.6",
