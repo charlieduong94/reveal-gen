@@ -6,6 +6,7 @@ const build = require('./build').exec
 const logger = require('../logger')
 const open = require('opn')
 const READ_PERMISSION = fs.constants ? fs.constants.R_OK : fs.R_OK
+const chokidar = require('chokidar')
 
 const options = {
   port: 8000,
@@ -57,7 +58,7 @@ module.exports = {
       open('http://localhost:' + port)
     })
 
-    fs.watch(process.cwd() + '/index.marko', async function (eventType, change) {
+    chokidar.watch(process.cwd() + '/index.marko').on('change', async function (event, path) {
       logger.info('Change detected. Triggering rebuild...')
       try {
         await build()

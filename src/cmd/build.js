@@ -6,6 +6,7 @@ const Mustache = require('mustache')
 const path = require('path')
 const logger = require('../logger')
 const WRITE_PERMISSION = fs.constants ? fs.constants.W_OK : fs.W_OK
+
 require('marko/node-require').install()
 
 lasso.configure({
@@ -53,12 +54,17 @@ async function _build (options) {
         let tempFilePath = tempDir + '/index.marko'
 
         fs.writeFileSync(tempFilePath, preMarkoOutput)
-                // clear out old template if previously required
+        // clear out old template if previously required
         delete require.cache[tempFilePath]
-        let template = require(tempFilePath)
-        let writeStream = fs.createWriteStream(path.join(process.cwd() + '/index.html'))
-        template.render({}, writeStream)
-        logger.info('Build Complete')
+        try {
+          let template = require(tempFilePath)
+          let writeStream = fs.createWriteStream(path.join(process.cwd() + '/index.html'))
+          template.renderSync({}, writeStream)
+          logger.info('Build Complete')
+        } catch (err) {
+          logger.error('Unable to build template')
+          logger.error(err.toString())
+        }
       })
     }
   })
