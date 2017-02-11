@@ -2,13 +2,16 @@
 
 A simple cli tool for generating quick [Reveal.js](https://github.com/hakimel/reveal.js) presentations using [Marko](https://github.com/marko-js/marko) and [Lasso](https://github.com/lasso-js/lasso).
 
-## Installation
+### Dependencies
+This project requires a node version that supports `async/await`.
+
+### Installation
 
 ```
 npm install -g reveal-gen
 ```
 
-## Usage
+##E Usage
 
 ```
 $ reveal-gen help
@@ -41,7 +44,7 @@ A `config.json` file containing the paths to all dependencies and a `index.marko
 <!DOCTYPE html>
 html lang="en"
     head
-        title - {{name}}
+        title -- {{name}}
         <!-- do not remove -->
         link rel="stylesheet" href="{{{lassoHead}}}"
     body
@@ -72,6 +75,8 @@ html lang="en"
             ---
 ````
 
-Make whatever changes you like. Then run `reveal-gen serve` to launch your presentation.
+Make whatever changes you like to this file. Then run `reveal-gen serve` to launch your presentation.
 
-Don't like the theme? Run `reveal-gen list-themes` to list the available themes that comes with `reveal.js`. Run `reveal-gen switch-theme <insert-theme-here>` to change the theme. If you have a custom theme you want to use, replace the path in the `theme` field in the `config.json` file.
+Don't like the theme? Run `reveal-gen list-themes` to list the available themes that comes with `reveal.js`.
+Run `reveal-gen switch-theme <insert-theme-here>` to change the theme. If you have a custom theme you want to use,
+replace the path in the `theme` field in the `config.json` file.
