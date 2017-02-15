@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{name}}</title>
+    <!-- do not remove -->
+    <link rel="stylesheet" href="{{{lassoHead}}}"/>
+  </head>
+  <body>
+    <marko-compiler-options preserve-whitespace/>
+    <div class='reveal'>
+      {{{presentationBody}}}
+    </div>
+    <!-- do not remove -->
+    <script type="text/javascript" src="{{{lassoBody}}}"/>
+    <script type="text/javascript">
+      window.onload = function () {
+        Reveal.initialize();
+        hljs.initHighlightingOnLoad();
+      }
+    </script>
+  </body>
+</html>

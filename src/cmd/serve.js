@@ -26,7 +26,9 @@ module.exports = {
   exec: async function () {
     // get options
     let options = _getOptions()
+
     await build()
+
     let server = http.createServer(function (req, res) {
       let filePath = process.cwd()
       if (req.url === '/') {
