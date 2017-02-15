@@ -70,14 +70,12 @@ async function _build (options) {
 
           let compiledPageTemplate = pageTemplate.renderToString()
           let compiledPresentationTemplate = presentationTemplate.renderToString()
-          console.log(compiledPresentationTemplate)
 
           let completeOutput = Mustache.render(compiledPageTemplate, {
             lassoHead,
             lassoBody,
             presentationBody: compiledPresentationTemplate
           })
-          console.log(completeOutput)
 
           fs.writeFileSync(path.join(process.cwd() + '/index.html'), completeOutput)
           logger.info('Build Complete')
