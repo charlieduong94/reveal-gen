@@ -1,9 +1,10 @@
 const readline = require('readline')
 
-module.exports = function (question) {
+module.exports = function (question, options) {
+  let { input, output } = options || {}
   let rl = readline.createInterface({
-    output: process.stdout,
-    input: process.stdin
+    output: output || process.stdout,
+    input: input || process.stdin
   })
 
   return new Promise((resolve) => {

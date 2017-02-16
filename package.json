@@ -4,7 +4,7 @@
   "description": "A tool for generating quick presentations using reveal.js, marko, and lasso.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --harmony test/run-tests.js",
     "lint": "eslint ."
   },
   "bin": {
@@ -33,7 +33,9 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.1",
     "eslint-plugin-standard": "^2.0.1",
-    "git-hooks": "^1.1.6"
+    "git-hooks": "^1.1.6",
+    "mocha": "^3.2.0",
+    "require-self-ref": "^2.0.1"
   },
   "repository": {
     "type": "git",

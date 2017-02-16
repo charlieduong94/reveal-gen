@@ -5,8 +5,11 @@ const fs = require('fs')
 const Mustache = require('mustache')
 const path = require('path')
 const logger = require('../logger')
+
 const _gatherDependencies = require('../util/gatherPresentationDependencies')
 const WRITE_PERMISSION = fs.constants ? fs.constants.W_OK : fs.W_OK
+
+const BASE_DEPENDENCIES = _gatherDependencies()
 
 require('marko/node-require').install()
 
@@ -17,6 +20,66 @@ lasso.configure({
   resolveCssUrls: true,
   bundlingEnabled: true
 })
+
+async function _createBundle (options) {
+  let {
+    dependencies,
+    tempDir,
+    precompiledPage,
+    precompiledPresentation
+  } = options || {}
+
+  return new Promise((resolve, reject) => {
+    lasso.lassoPage({
+      name: 'reveal presentation',
+      dependencies
+    }, function (err, result) {
+      if (err) {
+        reject(err)
+      } else {
+        let lassoHead = result.urlsBySlot.head[0].slice(1)
+        let lassoBody = result.urlsBySlot.body[0].slice(1)
+
+        // HACK: temporarily move the file to this workspace so
+        // that it can be compiled by marko
+        fs.access(tempDir, WRITE_PERMISSION, function (err) {
+          if (err) {
+            fs.mkdirSync(tempDir)
+          }
+          let tempPagePath = `${tempDir}/index.marko`
+          let tempPresentationPath = `${tempDir}/presentation.marko`
+
+          fs.writeFileSync(tempPagePath, precompiledPage)
+          fs.writeFileSync(tempPresentationPath, precompiledPresentation)
+          // clear out old template if previously required
+          delete require.cache[tempPagePath]
+          delete require.cache[tempPresentationPath]
+
+          try {
+            let pageTemplate = require(tempPagePath)
+            let presentationTemplate = require(tempPresentationPath)
+
+            let compiledPageTemplate = pageTemplate.renderToString()
+            let compiledPresentationTemplate = presentationTemplate.renderToString()
+
+            let completeOutput = Mustache.render(compiledPageTemplate, {
+              lassoHead,
+              lassoBody,
+              presentationBody: compiledPresentationTemplate
+            })
+
+            fs.writeFileSync(path.join(process.cwd() + '/index.html'), completeOutput)
+            logger.info('Build Complete')
+            resolve()
+          } catch (err) {
+            logger.error('Unable to build template')
+            reject(err)
+          }
+        })
+      }
+    })
+  })
+}
 
 async function _build (options) {
   const tempDir = path.normalize(path.join(__dirname, '/../../temp'))
@@ -35,56 +98,27 @@ async function _build (options) {
     return
   }
 
-  let dependencies = _gatherDependencies()
-  dependencies.concat(customConfig.dependencies)
-  dependencies.push(customConfig.theme)
+  let dependencies = BASE_DEPENDENCIES
 
-  lasso.lassoPage({
-    name: 'reveal presentation',
-    dependencies
-  }, function (err, result) {
-    if (err) {
-      logger.error(err)
-    } else {
-      let lassoHead = result.urlsBySlot.head[0].slice(1)
-      let lassoBody = result.urlsBySlot.body[0].slice(1)
+  if (customConfig.dependencies) {
+    dependencies = dependencies.concat(customConfig.dependencies)
+  }
 
-      // HACK: temporarily move the file to this workspace so
-      // that it can be compiled by marko
-      fs.access(tempDir, WRITE_PERMISSION, function (err) {
-        if (err) {
-          fs.mkdirSync(tempDir)
-        }
-        let tempPagePath = `${tempDir}/index.marko`
-        let tempPresentationPath = `${tempDir}/presentation.marko`
-
-        fs.writeFileSync(tempPagePath, precompiledPage)
-        fs.writeFileSync(tempPresentationPath, precompiledPresentation)
-        // clear out old template if previously required
-        delete require.cache[tempPagePath]
-        delete require.cache[tempPresentationPath]
-
-        try {
-          let pageTemplate = require(tempPagePath)
-          let presentationTemplate = require(tempPresentationPath)
-
-          let compiledPageTemplate = pageTemplate.renderToString()
-          let compiledPresentationTemplate = presentationTemplate.renderToString()
-
-          let completeOutput = Mustache.render(compiledPageTemplate, {
-            lassoHead,
-            lassoBody,
-            presentationBody: compiledPresentationTemplate
-          })
-
-          fs.writeFileSync(path.join(process.cwd() + '/index.html'), completeOutput)
-          logger.info('Build Complete')
-        } catch (err) {
-          logger.error('Unable to build template')
-          logger.error(err.toString())
-        }
-      })
+  if (customConfig.theme) {
+    let themePath
+    try {
+      themePath = require.resolve(customConfig.theme)
+    } catch (err) {
+      themePath = customConfig.theme
     }
+    dependencies.push(themePath)
+  }
+
+  await _createBundle({
+    dependencies,
+    tempDir,
+    precompiledPage,
+    precompiledPresentation
   })
 }
 
