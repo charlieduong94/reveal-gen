@@ -4,7 +4,7 @@ const Mustache = require('mustache')
 const fs = require('fs')
 const prompt = require('../util/prompt')
 const DEFAULT_THEME = 'white'
-const PRESENTATION_TEMPLATE_PATH = require.resolve('~/src/templates/presentation-template.marko')
+const PRESENTATION_TEMPLATE_PATH = require.resolve('../templates/presentation-template.marko')
 
 const _getThemes = require('../util/getThemes')
 

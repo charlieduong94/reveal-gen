@@ -1,4 +1,6 @@
 require('require-self-ref')
+require('babel-polyfill')
+
 const Mocha = require('mocha')
 const glob = require('glob')
 

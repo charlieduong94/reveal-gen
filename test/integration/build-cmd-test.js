@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const buildCmd = require('~/src/cmd/build')
+const buildCmd = require('~/dist/cmd/build')
 const fs = require('fs')
 const path = require('path')
 
@@ -25,7 +25,7 @@ describe('"build" command', function () {
 
   beforeEach(() => {
     // copy page template to temp dir
-    let template = fs.readFileSync(require.resolve('~/src/templates/presentation-template.marko'), 'utf8')
+    let template = fs.readFileSync(require.resolve('~/dist/templates/presentation-template.marko'), 'utf8')
     fs.writeFileSync(`${testTempDir}/presentation.marko`, template)
     // write json config to tempdir
     fs.writeFileSync(`${testTempDir}/config.json`, JSON.stringify({}))

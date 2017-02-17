@@ -1,7 +1,9 @@
-const args = process.argv.slice(2)
+require('babel-polyfill')
 
-const cmds = require('../src/commands')
-const help = cmds.help.exec
+var args = process.argv.slice(2)
+
+var cmds = require('../dist/commands')
+var help = cmds.help.exec
 
 if (args.length < 1) {
   help()

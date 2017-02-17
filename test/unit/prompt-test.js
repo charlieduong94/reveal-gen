@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const { Transform } = require('stream')
 
-const prompt = require('~/src/util/prompt')
+const prompt = require('~/dist/util/prompt')
 
 class Stream extends Transform {
   constructor () {

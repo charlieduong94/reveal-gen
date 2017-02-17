@@ -2,13 +2,16 @@
 
 A simple cli tool for generating quick [Reveal.js](https://github.com/hakimel/reveal.js) presentations using [Marko](https://github.com/marko-js/marko) and [Lasso](https://github.com/lasso-js/lasso).
 
-### Dependencies
-This project requires a node version that supports `async/await`.
-
 ### Installation
 
-```
+```bash
 npm install -g reveal-gen
+```
+
+### Testing
+
+```bash
+npm test
 ```
 
 ### Usage

@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const serveCmd = require('~/src/cmd/serve')
+const serveCmd = require('~/dist/cmd/serve')
 const fs = require('fs')
 const path = require('path')
 const fetch = require('node-fetch')
@@ -33,7 +33,7 @@ describe('"serve" command', function () {
 
   beforeEach(() => {
     // copy page template to temp dir
-    template = fs.readFileSync(require.resolve('~/src/templates/presentation-template.marko'), 'utf8')
+    template = fs.readFileSync(require.resolve('~/dist/templates/presentation-template.marko'), 'utf8')
     fs.writeFileSync(presentationPath, template)
 
     // write json config to tempdir

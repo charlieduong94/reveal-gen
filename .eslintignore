@@ -1,4 +1,4 @@
 *.marko.js
 test/temp/**/*.js
 coverage
-
+dist

@@ -11,7 +11,7 @@ const WRITE_PERMISSION = fs.constants ? fs.constants.W_OK : fs.W_OK
 
 const BASE_DEPENDENCIES = _gatherDependencies()
 
-const PAGE_TEMPLATE_PATH = require.resolve('~/src/templates/page-template.marko')
+const PAGE_TEMPLATE_PATH = require.resolve('../templates/page-template.marko')
 
 require('marko/node-require').install()
 

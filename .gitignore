@@ -6,3 +6,4 @@ test/temp
 .marko-devtools
 .nyc_output
 coverage
+dist

@@ -5,7 +5,7 @@ const path = require('path')
 
 const oldDir = process.cwd()
 
-const initCmd = require('~/src/cmd/init')
+const initCmd = require('~/dist/cmd/init')
 
 describe('"init" command', () => {
   let inputStream, outputStream

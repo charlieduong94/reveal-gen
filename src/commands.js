@@ -1,4 +1,4 @@
-require('require-self-ref')
+require('babel-polyfill')
 
 const path = require('path')
 const fs = require('fs')
