@@ -77,7 +77,7 @@ describe('"serve" command', function () {
       let responseText = await response.text()
       expect(responseText).to.not.equal(initialResponseText)
     }, {
-      maxAttempts: 5,
+      maxAttempts: 10,
       delay: 500
     })
   })

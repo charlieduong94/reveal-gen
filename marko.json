@@ -2,6 +2,9 @@
     "<markdown>" : {
         "preserve-whitespace": true,
         "body": "static-text",
-        "renderer": "./src/components/markdown"
+        "renderer": "./src/components/markdown/renderer"
+    },
+    "<slides>" : {
+        "renderer": "./src/components/slides/renderer"
     }
 }
