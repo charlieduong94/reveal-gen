@@ -25,7 +25,7 @@ describe('"build" command', function () {
 
   beforeEach(() => {
     // copy page template to temp dir
-    let template = fs.readFileSync(require.resolve('../../presentation-template.marko'), 'utf8')
+    let template = fs.readFileSync(require.resolve('~/src/templates/presentation-template.marko'), 'utf8')
     fs.writeFileSync(`${testTempDir}/presentation.marko`, template)
     // write json config to tempdir
     fs.writeFileSync(`${testTempDir}/config.json`, JSON.stringify({}))

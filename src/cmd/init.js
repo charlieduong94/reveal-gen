@@ -4,6 +4,7 @@ const Mustache = require('mustache')
 const fs = require('fs')
 const prompt = require('../util/prompt')
 const DEFAULT_THEME = 'white'
+const PRESENTATION_TEMPLATE_PATH = require.resolve('~/src/templates/presentation-template.marko')
 
 const _getThemes = require('../util/getThemes')
 
@@ -41,7 +42,7 @@ module.exports = {
     let themePath = 'reveal.js/css/theme/' + theme + '.css'
     console.log('Generating index.marko')
 
-    let template = fs.readFileSync(require.resolve('../../presentation-template.marko'), 'utf-8')
+    let template = fs.readFileSync(PRESENTATION_TEMPLATE_PATH, 'utf-8')
     let content = Mustache.render(template, {
       name: name,
       description: desc,

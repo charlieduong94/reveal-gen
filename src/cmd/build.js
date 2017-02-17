@@ -11,6 +11,8 @@ const WRITE_PERMISSION = fs.constants ? fs.constants.W_OK : fs.W_OK
 
 const BASE_DEPENDENCIES = _gatherDependencies()
 
+const PAGE_TEMPLATE_PATH = require.resolve('~/src/templates/page-template.marko')
+
 require('marko/node-require').install()
 
 lasso.configure({
@@ -81,16 +83,15 @@ async function _createBundle (options) {
   })
 }
 
-async function _build (options) {
+async function build (options) {
   const tempDir = path.normalize(path.join(__dirname, '/../../temp'))
   let presentationPath = `${process.cwd()}/presentation.marko`
-  let templatePath = require.resolve('../../page-template.marko')
   let configPath = process.cwd() + '/config.json'
 
   let customConfig, precompiledPage, precompiledPresentation
 
   try {
-    precompiledPage = fs.readFileSync(templatePath, 'utf8')
+    precompiledPage = fs.readFileSync(PAGE_TEMPLATE_PATH, 'utf8')
     precompiledPresentation = fs.readFileSync(presentationPath, 'utf8')
     customConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'))
   } catch (err) {
@@ -124,5 +125,5 @@ async function _build (options) {
 
 module.exports = {
   description: 'Compiles the template and outputs the minified js and css',
-  exec: _build
+  exec: build
 }

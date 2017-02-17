@@ -1,4 +1,4 @@
-'use strict'
+require('require-self-ref')
 
 const path = require('path')
 const fs = require('fs')
