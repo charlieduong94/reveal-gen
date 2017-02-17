@@ -42,25 +42,9 @@ class ServeCmdManager {
   }
 }
 
-module.exports = {
-  description: 'Serves up the presentation in the browser',
-  /**
-   * Serves the presentation
-   *
-   * @param { number } options.port - the port number to serve the presentation on
-   * @param { boolean } options.hotreload - whether or not to reload the presentation on file change
-   * @param { boolean } options.open - whether or not to open the presentation upon serving
-   *
-   * @returns { ServerManager }
-   */
-  exec: async function (options) {
-    if (!options) {
-      options = _getCliOptions()
-    }
-
-    options = Object.assign(DEFAULT_OPTIONS, options)
-
-    await build()
+async function _prepareServer (options) {
+  return new Promise((resolve) => {
+    const { port, autoOpen } = options
 
     const server = http.createServer(function (req, res) {
       let filePath = process.cwd()
@@ -86,28 +70,57 @@ module.exports = {
       })
     })
 
-    const { port, autoOpen } = options
-
     server.listen(port, function () {
       logger.info('Server is now listening on port ' + port)
       if (autoOpen) {
         logger.info('Opening presentation...')
         open('http://localhost:' + port)
       }
+      resolve(server)
     })
+  })
+}
+
+async function _prepareFileWatcher (filePath) {
+  return new Promise((resolve) => {
+    const watcher = chokidar.watch(filePath)
+      .on('ready', () => resolve(watcher))
+      .on('change', async function (event, path) {
+        logger.info('Change detected. Triggering rebuild...')
+        try {
+          await build()
+        } catch (err) {
+          logger.error(err)
+        }
+      })
+  })
+}
+
+module.exports = {
+  description: 'Serves up the presentation in the browser',
+  /**
+   * Serves the presentation
+   *
+   * @param { number } options.port - the port number to serve the presentation on
+   * @param { boolean } options.hotreload - whether or not to reload the presentation on file change
+   * @param { boolean } options.open - whether or not to open the presentation upon serving
+   *
+   * @returns { ServerManager }
+   */
+  exec: async function (options) {
+    if (!options) {
+      options = _getCliOptions()
+    }
+
+    options = Object.assign(DEFAULT_OPTIONS, options)
+
+    await build()
 
     const presentationPath = `${process.cwd()}/presentation.marko`
-    const watcher = chokidar.watch(presentationPath)
 
-    watcher.on('change', async function (event, path) {
-      logger.info('Change detected. Triggering rebuild...')
-      try {
-        await build()
-      } catch (err) {
-        logger.error(err)
-      }
-    })
+    let server = await _prepareServer(options)
+    let fileWatcher = await _prepareFileWatcher(presentationPath)
 
-    return new ServeCmdManager(server, watcher, presentationPath)
+    return new ServeCmdManager(server, fileWatcher, presentationPath)
   }
 }

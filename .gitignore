@@ -4,3 +4,5 @@ temp
 **/*.marko.js
 test/temp
 .marko-devtools
+.nyc_output
+coverage

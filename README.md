@@ -41,7 +41,7 @@ Done!
 
 A `config.json` file containing the paths to all dependencies and a `presentation.marko` file will be created for you.
 ````
-div.slides
+slides
   markdown
     ---
     ## reveal-gen
@@ -57,6 +57,29 @@ div.slides
         console.log('Hello world');
     ```
     ---
+````
+
+Sections of slides can be added by adding the `section` tag.
+
+````
+slides
+  markdown
+    ---
+    ## reveal-gen
+
+    #### Quick and Pretty Presentations
+
+    By Charlie
+    ---
+  section
+    markdown
+      ---
+      first slide of the section
+      ---
+    markdown
+      ---
+      second slide of the section
+      ---
 ````
 
 Make whatever changes you like to this file. Then run `reveal-gen serve` to launch your presentation.

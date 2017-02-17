@@ -4,7 +4,7 @@
   "description": "A tool for generating quick presentations using reveal.js, marko, and lasso.",
   "main": "index.js",
   "scripts": {
-    "test": "marko test && node --harmony test/run-tests.js",
+    "test": "marko test && nyc node --harmony test/run-tests.js",
     "lint": "eslint ."
   },
   "bin": {
@@ -38,6 +38,7 @@
     "marko-devtools": "0.0.9",
     "mocha": "^3.2.0",
     "node-fetch": "^1.6.3",
+    "nyc": "^10.1.2",
     "tri": "^1.0.1"
   },
   "repository": {
