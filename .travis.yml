@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "7.5.0"
+  - "6.9.1"
+  - "5.0.0"
+  - "4.4.4"
+script: "npm run test"
